@@ -1,23 +1,25 @@
-#include<stdio.h>
-#include<signal.h>
-#include<unistd.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 int wait_mark;
 void waiting(), stop();
 
 int main(int argc, char *argv[])
-{  
-	int  p1, p2;
-	signal(SIGINT,stop);
+{
+	int p1, p2;
+	signal(SIGINT, stop);
 
-	while((p1 = fork()) == -1);
+	while ((p1 = fork()) == -1)
+		;
 
-	if (p1 > 0)							/*在父进程中*/
+	if (p1 > 0) /*在父进程中*/
 	{
-		while((p2 = fork()) == -1);
+		while ((p2 = fork()) == -1)
+			;
 
-		if (p2 > 0)					/*在父进程中*/
+		if (p2 > 0) /*在父进程中*/
 		{
 			wait_mark = 1;
 			waiting();
@@ -28,37 +30,36 @@ int main(int argc, char *argv[])
 			printf("parent process exit!\n");
 			exit(0);
 		}
-		else						/*在子进程2中*/
+		else /*在子进程2中*/
 		{
 			wait_mark = 1;
 			signal(12, stop);
 			waiting();
-			lockf(1, 1, 0);
+			//lockf(1, 1, 0);
 			printf("child process 2 is killed by parent!\n");
-			lockf(1, 0, 0);
+			//lockf(1, 0, 0);
 			exit(0);
 		}
-	} 
-	else								/*在子进程1中*/
+	}
+	else /*在子进程1中*/
 	{
 		wait_mark = 1;
 		signal(10, stop);
 		waiting();
-		lockf(1, 1, 0);
+		//lockf(1, 1, 0);
 		printf("child process 1 is killed by parent!\n");
-		lockf(1, 0, 0);
+		//lockf(1, 0, 0);
 		exit(0);
 	}
 }
 
 void waiting()
 {
-	while(wait_mark != 0);
+	while (wait_mark != 0)
+		;
 }
 
 void stop()
 {
 	wait_mark = 0;
 }
-
-
