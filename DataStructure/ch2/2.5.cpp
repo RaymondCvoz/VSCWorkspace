@@ -18,6 +18,7 @@ bool rev(LinkList &L)
     L->next = pre;
     return true;
 }
+
 int main()
 {
     LinkList L;
