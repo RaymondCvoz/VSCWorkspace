@@ -38,10 +38,10 @@ main()
 		{
 			wait(NULL);				 /*同步*/
 			read(fd[0], inpipe, 50); /*从管道中读长为50字节的串*/
-			printf("%s/n", inpipe);
+			printf("%s\n", inpipe);
 			wait(NULL);
 			read(fd[0], inpipe, 50);
-			printf("%s/n", inpipe);
+			printf("%s\n", inpipe);
 			exit(0);
 		}
 	}
