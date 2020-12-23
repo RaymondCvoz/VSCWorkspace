@@ -6,7 +6,7 @@
 #include <string.h>
 #include <errno.h>
 
-#define BUFFER_SIZE	1024
+#define BUFFER_SIZE 1024
 
 int main(int argc, char **argv)
 {
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
-again:
+	again:
 		//ssize_t read(int fd, void *buf, size_t count);
 		if ((n = read(fd, buffer, BUFFER_SIZE)) < 0)
 		{
@@ -58,4 +58,3 @@ again:
 	}
 	return 0;
 }
-

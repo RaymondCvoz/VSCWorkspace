@@ -7,7 +7,7 @@
 #include <string.h>
 #include <errno.h>
 
-#define BUFFER_SIZE	1024
+#define BUFFER_SIZE 1024
 
 void signal_handler(int s);
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 	//char *fgets(char *s, int size, FILE * stream);
 	while (fgets(buffer, BUFFER_SIZE, stdin))
 	{
-again:
+	again:
 		//ssize_t write(int fd, const void *buf, size_t count);
 		if ((n = write(fd, buffer, strlen(buffer))) < 0)
 		{
@@ -51,8 +51,8 @@ again:
 				fprintf(stderr, "write() failed on fifo: %s\n", strerror(errno));
 				break;
 			}
-		}  // end if
-	}  // end while
+		} // end if
+	}	  // end while
 
 	return 0;
 }
@@ -61,4 +61,3 @@ void signal_handler(int signo)
 {
 	fprintf(stdout, "Caught signal %d\n", signo);
 }
-

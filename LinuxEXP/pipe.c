@@ -4,7 +4,7 @@
 
 int pid1, pid2;
 
-main()
+int main()
 {
 	int fd[2];
 	char outpipe[100], inpipe[100];
@@ -17,7 +17,7 @@ main()
 		sprintf(outpipe, "child 1 process is sending message!");
 		/*把串放入数组outpipe中*/
 		write(fd[1], outpipe, 50); /*向管道写长为50字节的串*/
-		sleep(5);				   /*自我阻塞5秒*/
+		//sleep(5);				   /*自我阻塞5秒*/
 		lockf(fd[1], 0, 0);
 		exit(0);
 	}
@@ -30,7 +30,7 @@ main()
 			lockf(fd[1], 1, 0); /*互斥*/
 			sprintf(outpipe, "child 2 process is sending message!");
 			write(fd[1], outpipe, 50);
-			sleep(5);
+			//sleep(5);
 			lockf(fd[1], 0, 0);
 			exit(0);
 		}
