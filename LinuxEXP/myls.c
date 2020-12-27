@@ -17,6 +17,7 @@ int aflag = 0, lflag = 0;
 void displayfile(char *name, char *showname);
 void displaydir(const char *name);
 
+extern int optind, optopt;
 int main(int argc, char *argv[])
 {
 	struct stat buf;
