@@ -15,7 +15,7 @@ typedef struct //定义消息结构体：消息类型和消息数据
 } msgbuf;
 
 #define LEN sizeof(msgbuf) - sizeof(long)
-
+//😂
 int main()
 {
 	int msgid;

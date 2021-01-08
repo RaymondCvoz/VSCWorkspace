@@ -8,6 +8,7 @@ void waiting(), stop();
 
 int main(int argc, char *argv[])
 {
+
 	int p1, p2;
 	signal(SIGINT, stop);
 	while ((p1 = fork()) == -1)

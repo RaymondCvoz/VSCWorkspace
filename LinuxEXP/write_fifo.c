@@ -22,7 +22,6 @@ int main(int argc, char **argv)
 	}
 
 	signal(SIGPIPE, signal_handler);
-
 	//int open(const char *path, int oflag, ...);
 	if ((fd = open(argv[1], O_WRONLY)) < 0)
 	{

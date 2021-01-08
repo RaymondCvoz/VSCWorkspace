@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <dirent.h>
 
+int a[10];
 int main()
 {
-    int len = 5;
-    int *pt = (int *)malloc(len * sizeof(int));
-    int *p = pt;
-    for (int i = 0; i < len; i++)
-    {
-        p++;
-    }
-    *p = 5;
-    printf("%d", *p);
-    return 0;
+    time_t t;
+    time(&t);
+    struct tm *a = gmtime(&t);
+    printf("%d\n", a->tm_sec);
+    printf("%s\n", ctime(&t));
 }
