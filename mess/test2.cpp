@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <cstdio>
 #include <cstring>
 #include <map>
@@ -6,7 +6,8 @@
 std::map<int, bool> map;
 int changeId[9][4] = {{-1, -1, 3, 1}, {-1, 0, 4, 2}, {-1, 1, 5, -1}, {0, -1, 6, 4}, {1, 3, 7, 5}, {2, 4, 8, -1}, {3, -1, -1, 7}, {4, 6, -1, 8}, {5, 7, -1, -1}}; //0出现在0->8的位置后该和哪些位置交换
 const int M = 400000;                                                                                                                                            //9！=362800，因此数组开40W足够了
-int des = 123804765;                                                                                                                                             //num存储所有排列，len表示排列的个数也就是9！，des为目的状态直接用整数表示便于比较
+int des = 654873210;
+//456783210                                                                                                                                           //num存储所有排列，len表示排列的个数也就是9！，des为目的状态直接用整数表示便于比较
 int que[M][3];
 //0-->排列,1-->排列中0的位置,2-->步数
 void swap(char *c, int a, int b)
@@ -45,6 +46,8 @@ int bfs(int n, int p)
             }
         }
         head++;
+        //getchar();
+        std::cout << tail - head << "\n";
     }
 }
 

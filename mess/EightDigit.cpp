@@ -4,57 +4,75 @@
 #include <string>
 #include <queue>
 
-std::map<std::string, bool> map;
 int cid[9][4] = {{-1, -1, 3, 1}, {-1, 0, 4, 2}, {-1, 1, 5, -1}, {0, -1, 6, 4}, {1, 3, 7, 5}, {2, 4, 8, -1}, {3, -1, -1, 7}, {4, 6, -1, 8}, {5, 7, -1, -1}};
-;
-std::string st, ed = "123804765";
-std::queue<std::string> status;
-std::queue<int> zero, step;
+; //0出现在0-8的位置后该和哪些位置交换
 
-int bfs(std::string init, int p)
+struct ST
 {
-    map[init] = 1;
-    status.push(init);
-    zero.push(p);
-    step.push(0);
-    while (!status.empty())
-    {
-        std::string cnt = status.front();
-        int pos = zero.front();
+    std::string status;
+    int step, zero;
+};
 
-        for (int i = 0; i < 4; i++)
+ST st;                           //st存储起始状态
+std::string ed;                  //ed存储目标状态
+std::map<std::string, bool> map; //string到bool的map存储某一状态是否被遍历过
+std::queue<ST> q;
+int bfs(ST st, int p)
+{
+    if (st.status == ed) //若初始状态和目标状态相等
+    {
+        return 0; //直接返回步数为0
+    }
+    map[st.status] = 1; //对于每一个状态使得此状态对应的map值为1
+    q.push(st);         //将当前状态加入队列
+    while (!q.empty())  //当队列非空，即还有未遍历的状态并且未找到目标状态
+    {
+        ST cnt = q.front(); //取出当前队头的状态
+        int pos = cnt.zero; //取出当前状态中0的位置
+        ST origin = cnt;
+        for (int i = 0; i < 4; i++) //对当前状态的四个方向进行遍历
         {
-            int tgt = cid[pos][i];
+            cnt = origin;          //保存当前状态
+            int tgt = cid[pos][i]; //根据0的位置确定目标状态
             if (tgt != -1)
             {
-                std::swap(cnt[pos], cnt[tgt]);
-                if (cnt == ed)
-                    return step.front() + 1;
-                if (!map.count(cnt))
+                std::swap(cnt.status[pos], cnt.status[tgt]); //更改当前状态
+                if (cnt.status == ed)                        //如果当前状态等于目标状态
+                    return cnt.step + 1;                     //返回步数
+                if (!map.count(cnt.status))                  //如果当前状态没有被遍历过
                 {
-                    status.push(cnt);
-                    zero.push(tgt);
-                    step.push(step.front() + 1);
-                    map[cnt] = 1;
+                    cnt.zero = tgt; //修改
+                    cnt.step += 1;
+                    q.push(cnt); //将当前状态加入队列
+                    map[cnt.status] = 1;
                 }
-                std::swap(cnt[pos], cnt[tgt]);
+                std::swap(cnt.status[pos], cnt.status[tgt]); //退回之前的状态，以进行下一次更改
             }
         }
-        status.pop();
-        zero.pop();
-        step.pop();
+        q.pop();
     }
+    return -1; //表示本局面无解
 }
 
 int main()
 {
     int pos = -1;
-    std::cin >> st;
-    while (st[++pos] != '0')
+    std::cout << "Input inital Status:";
+    std::cin >> st.status; //输入起始状态
+    std::cout << "Input Target Status:";
+    std::cin >> ed; //输入目标状态
+    while (st.status[++pos] != '0')
         ;
-    if (st != ed)
+    st.step = 0;
+    st.zero = pos;
+    int ans = bfs(st, pos);
+    if (ans == -1) //bfs返回值为-1表示无解
     {
-        std::cout << bfs(st, pos);
+        std::cout << "No Solution";
+    }
+    else //输出总步数
+    {
+        std::cout << "Total Step : " << ans;
     }
     return 0;
 }

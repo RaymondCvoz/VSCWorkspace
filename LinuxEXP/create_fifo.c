@@ -6,6 +6,7 @@
 
 int main(int argc, char **argv)
 {
+	printf("%d\n", argc);
 	if (argc < 2)
 	{
 		fprintf(stdout, "Usage: %s <filename>\n", argv[0]);
@@ -18,6 +19,5 @@ int main(int argc, char **argv)
 		fprintf(stderr, "mkfifo() failed: %s\n", strerror(errno));
 		exit(1);
 	}
-
 	return 0;
 }

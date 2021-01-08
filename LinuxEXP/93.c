@@ -29,7 +29,7 @@ int main(void)
 		global++;
 		test++;
 		printf("global=%d test=%d Child,my PID is %d\n", global, test, getpid());
-		exit(0);
+		//exit(0);
 	}
 	/*else be the parent*/
 	global += 2;
