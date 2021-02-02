@@ -1,11 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+<<<<<<< HEAD
+#include <string.h>
+#include <time.h>
+#include <dirent.h>
+=======
 char s[1000];
 int tmp1, tmp2, tmp3;
+>>>>>>> 4091f1733ed66edc82e105c7a09a81d279d9bd87
 
+int a[10];
 int main()
 {
+<<<<<<< HEAD
+    time_t t;
+    time(&t);
+    struct tm *a = gmtime(&t);
+    printf("%d\n", a->tm_sec);
+    printf("%s\n", ctime(&t));
+=======
     freopen("test.txt", "r", stdin);
     freopen("tmp.txt", "w", stdout);
     int line = 0;
@@ -50,4 +64,5 @@ int main()
     fclose(stdin);
     fclose(stdout);
     return 0;
+>>>>>>> 4091f1733ed66edc82e105c7a09a81d279d9bd87
 }
